@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model IEnumerable<CookApp.Models.Recipe>
+
+<h1>Recipes</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Recipe" asp-action="Index" method="get">
+    <div class="form-group">
+        <input type="text" name="searchString" placeholder="Search by recipe name" />
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="/Recipe" class="btn btn-secondary">Clear</a>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <!-- Add headers for other properties like Ingredients and Steps if needed -->
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <!-- Add cells for other properties like Ingredients and Steps if needed -->
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <th>
+        <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParam"]">Name</a>
+    </th>
+</table>
+
